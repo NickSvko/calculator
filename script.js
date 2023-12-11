@@ -1,4 +1,35 @@
-let firstOperand, secondOperand, operator;
+let firstOperand = "0";
+let secondOperand = "";
+let operator = "";
+
+const display = document.querySelector('#display');
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => addEventListener('click', buttonPressed));
+
+
+function buttonPressed(button) {
+    let element = button.target;
+    if(element.classList.contains('number')) {
+        numberPressed(element);
+    }
+    else if(element.classList.contains('operator')) {
+        operatorPressed(element);
+    }
+    else if(element.id == 'decimalBtn') {
+        decimalPressed(element);
+
+    }
+    else if(element.id == 'clearBtn'){
+        clearPressed(element);
+    }
+    else if(element.id == 'signBtn') {
+        changeSignPressed(element);
+    }
+    else if(element.id == 'equalityBtn') {
+        equalPressed(element);
+    }
+}
 
 
 function operate(firstOperand, secondOperand, operator) {
@@ -7,7 +38,7 @@ function operate(firstOperand, secondOperand, operator) {
             add(firstOperand, secondOperand);
             break;
         case '−':
-            subtrant(firstOperand, secondOperand);
+            subtract(firstOperand, secondOperand);
             break;
         case '×':
             multiply(firstOperand, secondOperand);
@@ -17,9 +48,10 @@ function operate(firstOperand, secondOperand, operator) {
             break;
         case '%':
             module(firstOperand, secondOperand);
-            break;
     }
 }
+
+
 
 
 
