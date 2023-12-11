@@ -13,40 +13,90 @@ body {
 .calculator {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: rgb(50, 49, 49);
     height: 600px;
     width: 400px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 1px;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
     height: 400px;
-    gap: 10px;
+    gap: 1px;
 }
 
 .line {
     flex-grow: 1;
     display: flex;
-    gap: 10px;
+    gap: 1px;
 }
 
 button {
     flex-grow: 1;
-    height: 70px;
-    width: 70px;
-    padding: 0;
     border: 0;
-    flex: 1 1 180px;
+    width: 99px;
+    background-color: rgb(141, 139, 139);
+    color: white;
+    font-size: 30px;
+}
+
+.topLine button{
+    background-color: rgb(74, 72, 72);
+}
+
+.rightColumn, #divisionBtn {
+    background-color: orange;
 }
 
 #btn0 {
-    width: 180px;
+    border-bottom-left-radius: 18px;
+    width: 50%;
+}
+
+.buttons .line .rightSide {
+    display: flex;
+    gap: 1px;
+    width: 50%;
+}
+
+#equalityBtn {
+    border-bottom-right-radius: 18px;
 }
 
 .display {
+    display: flex;
+    flex-direction: column;
     height: 200px;
+    border: 1px solid red;
+    gap: 1px;
+    color: white;
+    text-align: center;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+.display #equation {
+    flex-grow: 1;
+    font-size: 30px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.display #result {
+    flex-grow: 3;
+    font-size: 60px;
+}
+
+#equation, #result {
+    border: 1px solid red;
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    padding-right:20px ;
+}
+
+
 
