@@ -18,6 +18,7 @@ body {
     width: 400px;
     border-radius: 20px;
     padding: 1px;
+    margin-top: 40px;
 }
 
 .buttons {
@@ -43,7 +44,7 @@ button {
 }
 
 .topLine button{
-    background-color: rgb(74, 72, 72);
+    background-color: rgb(79, 76, 76);
 }
 
 .rightColumn, #divisionBtn {
@@ -69,7 +70,6 @@ button {
     display: flex;
     flex-direction: column;
     height: 200px;
-    border: 1px solid red;
     gap: 1px;
     color: white;
     text-align: center;
@@ -91,7 +91,6 @@ button {
 }
 
 #equation, #result {
-    border: 1px solid red;
     display: flex;
     align-items: end;
     justify-content: flex-end;
