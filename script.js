@@ -74,7 +74,8 @@ function equalPressed() {
         else {
             equation.firstOperand = operate(equation);
             equation.secondOperand = '';
-            display.textContent = equation.firstOperand;   
+            // Rounds the 7 decimal digits of a number
+            display.textContent = Math.round(equation.firstOperand * 10000000) / 10000000; 
         }
     }
 }
