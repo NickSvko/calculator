@@ -58,11 +58,11 @@ function operatorPressed(operator) {
 }
 
 
-function clearPressed() {
-    equation.firstOperand = '';
+function clearPressed(displayText = '') {
+    equation.firstOperand = '0';
     equation.secondOperand = '';
     equation.operator = '';
-    display.textContent = '';
+    display.textContent = displayText;
 }
 
 function operate(equation) {
@@ -81,7 +81,7 @@ function operate(equation) {
             result = firstNumber * secondNumber;
             break;        
         case '÷':
-            result = firstNumber / secondNumber;
+            secondNumber == 0 ? clearPressed("Not a Number") : result = firstNumber / secondNumber;
             break;
         case '%':
             result = firstNumber % secondNumber;
