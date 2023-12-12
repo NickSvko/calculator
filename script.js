@@ -18,18 +18,29 @@ function buttonPressed(button) {
     else if(element.classList.contains('operator')) {
         operatorPressed(element.textContent);
     }
-    else if(element.id == 'decimalBtn') {
-        decimalPressed(element);
+    else {
+        switch(element.id) {
+            case 'decimalBtn': 
+                decimalPressed(element);
+                break;
+            case 'clearBtn': 
+                clearPressed();
+                break;
+            case 'signBtn': 
+                changeSignPressed(element);
+                break;
+            case 'equalityBtn': 
+                equalPressed(element);
+        }
+    }
+}
 
-    }
-    else if(element.id == 'clearBtn'){
-        clearPressed(element);
-    }
-    else if(element.id == 'signBtn') {
-        changeSignPressed(element);
-    }
-    else if(element.id == 'equalityBtn') {
-        equalPressed(element);
+
+function equalPressed() {
+    if(equation.secondOperand != '') {
+        equation.firstOperand = operate(equation);
+        equation.secondOperand = '';
+        display.textContent = equation.firstOperand;
     }
 }
 
@@ -49,21 +60,18 @@ function numberPressed(number) {
 
 
 function operatorPressed(operator) {
-    if(equation.secondOperand != '') {
-        equation.firstOperand = operate(equation);
-        equation.secondOperand = '';
-        display.textContent = equation.firstOperand;
-    }
+    equalPressed();
     equation.operator = operator;
 }
 
 
-function clearPressed(displayText = '') {
+function clearPressed(text = '') {
     equation.firstOperand = '0';
     equation.secondOperand = '';
     equation.operator = '';
-    display.textContent = displayText;
+    display.textContent = text;
 }
+
 
 function operate(equation) {
     let firstNumber = Number(equation.firstOperand);
@@ -85,6 +93,7 @@ function operate(equation) {
             break;
         case '%':
             result = firstNumber % secondNumber;
-        }
+    }
         return result;
 }
+
