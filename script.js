@@ -48,6 +48,24 @@ function changeSignPressed() {
 }
 
 
+function decimalPressed() {
+    if(Number.isInteger(Number(equation.firstOperand)) && equation.operator == '') {
+        equation.firstOperand += '.';
+        display.textContent = equation.firstOperand;
+    }
+    else if(equation.operator != '') {
+        if(equation.secondOperand == '') {
+            equation.secondOperand = '0.';
+            display.textContent = equation.secondOperand;
+        }
+        else if(Number.isInteger(Number(equation.secondOperand))) {
+            equation.secondOperand += '.';
+            display.textContent = equation.secondOperand;
+        }
+    }
+}
+
+
 function equalPressed() {
     if(equation.secondOperand != '') {
         if(equation.operator == '÷' && equation.secondOperand == '0') {
@@ -82,11 +100,11 @@ function operatorPressed(operator) {
 }
 
 
-function clearPressed(text = '') {
+function clearPressed(displayText = 0) {
     equation.firstOperand = '0';
     equation.secondOperand = '';
     equation.operator = '';
-    display.textContent = text;
+    display.textContent = displayText;
 }
 
 
