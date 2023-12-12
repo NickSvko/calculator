@@ -50,15 +50,20 @@ function numberPressed(number) {
 
 function operatorPressed(operator) {
     if(equation.secondOperand != '') {
-        console.log(`oper1 before: ${equation.firstOperand}`);
         equation.firstOperand = operate(equation);
-        console.log(`oper1 after: ${equation.firstOperand}`);
+        equation.secondOperand = '';
         display.textContent = equation.firstOperand;
     }
     equation.operator = operator;
-    console.log(`oper1: ${equation.firstOperand}, oper2: ${equation.secondOperand}, operator: ${operator}`);
 }
 
+
+function clearPressed() {
+    equation.firstOperand = '';
+    equation.secondOperand = '';
+    equation.operator = '';
+    display.textContent = '';
+}
 
 function operate(equation) {
     let firstNumber = Number(equation.firstOperand);
@@ -70,16 +75,16 @@ function operate(equation) {
             result = firstNumber + secondNumber;
             break;
         case '−':
-            result = num1 - num2;
+            result = firstNumber - secondNumber;
             break;
         case '×':
-            result = num1 * num2;
+            result = firstNumber * secondNumber;
             break;        
         case '÷':
-            result = num1 / num2;
+            result = firstNumber / secondNumber;
             break;
         case '%':
-            result = num1 % num2;
+            result = firstNumber % secondNumber;
         }
         return result;
 }
