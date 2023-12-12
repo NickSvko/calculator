@@ -36,11 +36,28 @@ function buttonPressed(button) {
 }
 
 
+function changeSignPressed() {
+    if(equation.secondOperand == '') {
+        equation.firstOperand = (-1) * Number(equation.firstOperand);
+        display.textContent = equation.firstOperand;
+    }
+    else {
+        equation.secondOperand = (-1) * Number(equation.secondOperand);
+        display.textContent = equation.secondOperand;
+    }
+}
+
+
 function equalPressed() {
     if(equation.secondOperand != '') {
-        equation.firstOperand = operate(equation);
-        equation.secondOperand = '';
-        display.textContent = equation.firstOperand;
+        if(equation.operator == '÷' && equation.secondOperand == '0') {
+            clearPressed("Not a Number");
+        }
+        else {
+            equation.firstOperand = operate(equation);
+            equation.secondOperand = '';
+            display.textContent = equation.firstOperand;   
+        }
     }
 }
 
@@ -89,11 +106,10 @@ function operate(equation) {
             result = firstNumber * secondNumber;
             break;        
         case '÷':
-            secondNumber == 0 ? clearPressed("Not a Number") : result = firstNumber / secondNumber;
+            result = firstNumber / secondNumber;
             break;
         case '%':
             result = firstNumber % secondNumber;
     }
         return result;
 }
-
