@@ -1,7 +1,7 @@
 let equation = {
-    firstOperand: "0",
-    secondOperand: "",
-    operator: "",
+    firstOperand: '0',
+    secondOperand: '',
+    operator: '',
 }
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
@@ -15,87 +15,71 @@ function buttonPressed(button) {
     if(element.classList.contains('number')) {
         numberPressed(element.textContent);
     }
-    // else if(element.classList.contains('operator')) {
-    //     operatorPressed(element);
-    // }
-    // else if(element.id == 'decimalBtn') {
-    //     decimalPressed(element);
+    else if(element.classList.contains('operator')) {
+        operatorPressed(element.textContent);
+    }
+    else if(element.id == 'decimalBtn') {
+        decimalPressed(element);
 
-    // }
-    // else if(element.id == 'clearBtn'){
-    //     clearPressed(element);
-    // }
-    // else if(element.id == 'signBtn') {
-    //     changeSignPressed(element);
-    // }
-    // else if(element.id == 'equalityBtn') {
-    //     equalPressed(element);
-    // }
+    }
+    else if(element.id == 'clearBtn'){
+        clearPressed(element);
+    }
+    else if(element.id == 'signBtn') {
+        changeSignPressed(element);
+    }
+    else if(element.id == 'equalityBtn') {
+        equalPressed(element);
+    }
 }
 
 
-function numberPressed(numberString) {
-    display.textContent += numberString;
+function numberPressed(number) {
+    display.textContent += number;
 
     if(equation.operator == '') {
-        equation.firstOperand == '0' ? equation.firstOperand = numberString : equation.firstOperand += numberString;
+        equation.firstOperand == '0' ? equation.firstOperand = number : equation.firstOperand += number;
         display.textContent = equation.firstOperand;
     }
     else {
-        equation.secondOperand += numberString;
+        equation.secondOperand += number;
         display.textContent = equation.secondOperand;
     }
 }
 
 
-function operate(firstOperand, secondOperand, operator) {
-    switch(operator) {
+function operatorPressed(operator) {
+    if(equation.secondOperand != '') {
+        console.log(`oper1 before: ${equation.firstOperand}`);
+        equation.firstOperand = operate(equation);
+        console.log(`oper1 after: ${equation.firstOperand}`);
+        display.textContent = equation.firstOperand;
+    }
+    equation.operator = operator;
+    console.log(`oper1: ${equation.firstOperand}, oper2: ${equation.secondOperand}, operator: ${operator}`);
+}
+
+
+function operate(equation) {
+    let firstNumber = Number(equation.firstOperand);
+    let secondNumber = Number(equation.secondOperand);
+    let result;
+
+    switch(equation.operator) {
         case '+':
-            add(firstOperand, secondOperand);
+            result = firstNumber + secondNumber;
             break;
         case '−':
-            subtract(firstOperand, secondOperand);
+            result = num1 - num2;
             break;
         case '×':
-            multiply(firstOperand, secondOperand);
+            result = num1 * num2;
             break;        
         case '÷':
-            divide(firstOperand, secondOperand);
+            result = num1 / num2;
             break;
         case '%':
-            module(firstOperand, secondOperand);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function add(num1, num2) {
-    return num1 + num2;
-}
-
-function subtract(num1, num2) {
-    return num1 - num2;
-}
-
-function multiply(num1, num2) {
-    return num1 * num2;
-}
-
-function divide(num1, num2) {
-    return num1 / num2;
-}
-
-function module(num1, num2) {
-    return num1 % num2;
+            result = num1 % num2;
+        }
+        return result;
 }
