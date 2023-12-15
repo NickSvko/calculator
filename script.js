@@ -3,36 +3,84 @@ let equation = {
     secondOperand: '',
     operator: '',
 }
+
+
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
 
-buttons.forEach((button) => addEventListener('click', buttonPressed));
+buttons.forEach(button => {
+    button.addEventListener('click', () => buttonPressed(button));
+    button.addEventListener('mousedown', () => selectButton(button));
+    button.addEventListener('mouseup', () => unselectButton(button));
+})
+
+
+function selectButton(button) {
+    if(button.classList.contains('number') || button.id == 'decimalBtn') {
+        button.style.backgroundColor = 'rgb(255 255 255 / 67%)';
+    }
+    else if(button.classList.contains('rightColumn')) {
+        button.style.backgroundColor = '#ffa500b0';
+    }
+    else if(button.classList.contains('topLine')) {
+        button.style.backgroundColor = 'rgb(141, 139, 139)';
+    }
+}
+
+
+function unselectButton(button) {
+    if(button.classList.contains('number') || button.id == 'decimalBtn') {
+        button.style.backgroundColor = 'rgb(141, 139, 139)';
+    }
+    else if(button.classList.contains('rightColumn')) {
+        button.style.backgroundColor = 'orange';
+    }
+    else if(button.classList.contains('topLine')) {
+        button.style.backgroundColor = 'rgb(97, 94, 94)';
+    }
+
+}
 
 
 function buttonPressed(button) {
-    let element = button.target;
 
-    if(element.classList.contains('number')) {
-        numberPressed(element.textContent);
+    if(button.classList.contains('number')) {
+        numberPressed(button.textContent);
     }
-    else if(element.classList.contains('operator')) {
-        operatorPressed(element.textContent);
+    else if(button.classList.contains('operator')) {
+        if(button.id != 'moduleBtn') {
+            keepButtonPressed(button);
+        }
+        operatorPressed(button.textContent);
     }
     else {
-        switch(element.id) {
+        switch(button.id) {
             case 'decimalBtn': 
-                decimalPressed(element);
+                decimalPressed(button);
                 break;
             case 'clearBtn': 
                 clearPressed();
                 break;
             case 'signBtn': 
-                changeSignPressed(element);
+                changeSignPressed(button);
                 break;
-            case 'equalityBtn': 
-                equalPressed(element);
+            case 'equalityBtn':
+                releasePressedButton(); 
+                equalPressed(button);
         }
     }
+}
+
+
+function keepButtonPressed(button) {
+    releasePressedButton();
+    button.style.border = '1px solid black';
+}
+
+
+function releasePressedButton() {
+    const operators = document.querySelectorAll('.operator');
+    operators.forEach((button) => button.style.border = 'none');
 }
 
 
@@ -103,6 +151,7 @@ function operatorPressed(operator) {
 
 
 function clearPressed(displayText = 0) {
+    releasePressedButton();
     equation.firstOperand = '0';
     equation.secondOperand = '';
     equation.operator = '';

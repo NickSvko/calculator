@@ -54,13 +54,14 @@ button {
     background-color: rgb(141, 139, 139);
     color: white;
     font-size: 30px;
+    border: 1px solid transparent; 
 }
 
-.topLine button{
-    background-color: rgb(79, 76, 76);
+.topLine {
+    background-color: rgb(97, 94, 94);
 }
 
-.rightColumn, #divisionBtn {
+.rightColumn {
     background-color: orange;
 }
 
