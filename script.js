@@ -96,6 +96,7 @@ function numberPressed(number) {
 
 
 function operatorPressed(operator) {
+    /* If both operands are occupied, perform the arithmetic operation between them */
     equalPressed();
     equation.operator = operator;
 }
