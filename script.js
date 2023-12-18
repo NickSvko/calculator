@@ -93,13 +93,17 @@ function changeSignPressed() {
         equation.secondOperand = (-1) * Number(equation.secondOperand);
         display.textContent = equation.secondOperand;
     }
+    displayBlink();
 }
 
 
 function decimalPressed() {
-    if(Number.isInteger(Number(equation.firstOperand)) && equation.operator == '') {
+    const firstOperand = equation.firstOperand;
+
+    if(Number.isInteger(Number(firstOperand)) && equation.operator == '' && !firstOperand.includes('.')) {
         equation.firstOperand += '.';
         display.textContent = equation.firstOperand;
+        displayBlink();
     }
     else if(equation.operator != '') {
         if(equation.secondOperand == '') {
@@ -124,7 +128,11 @@ function equalPressed() {
             equation.secondOperand = '';
             // Rounds the 7 decimal digits of a number
             display.textContent = Math.round(equation.firstOperand * 10000000) / 10000000; 
+            displayBlink();
         }
+    }
+    else {
+        displayBlink();
     }
 }
 
@@ -145,8 +153,17 @@ function numberPressed(number) {
 
 function operatorPressed(operator) {
     /* If both operands are occupied, perform the arithmetic operation between them */
-    equalPressed();
     equation.operator = operator;
+    equalPressed();
+}
+
+
+function displayBlink() {
+    // Clear display text for 100 ms
+    const currentDisplay = display.textContent;
+    display.textContent = ''; // Clear the display
+    // Reappear after 100 ms
+    setTimeout(() => display.textContent = currentDisplay, 100);
 }
 
 
@@ -156,6 +173,7 @@ function clearPressed(displayText = 0) {
     equation.secondOperand = '';
     equation.operator = '';
     display.textContent = displayText;
+    displayBlink();
 }
 
 
