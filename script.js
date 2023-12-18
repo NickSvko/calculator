@@ -137,6 +137,13 @@ function equalPressed() {
 }
 
 
+function operatorPressed(operator) {
+    /* If both operands are occupied, perform the arithmetic operation between them */
+    equation.operator = operator;
+    equalPressed();
+}
+
+
 function numberPressed(number) {
     display.textContent += number;
 
@@ -151,19 +158,12 @@ function numberPressed(number) {
 }
 
 
-function operatorPressed(operator) {
-    /* If both operands are occupied, perform the arithmetic operation between them */
-    equation.operator = operator;
-    equalPressed();
-}
-
-
 function displayBlink() {
-    // Clear display text for 100 ms
+    // Clear display text for 50 ms
     const currentDisplay = display.textContent;
     display.textContent = ''; // Clear the display
-    // Reappear after 100 ms
-    setTimeout(() => display.textContent = currentDisplay, 100);
+    // Reappear after 50 ms
+    setTimeout(() => display.textContent = currentDisplay, 50);
 }
 
 
